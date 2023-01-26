@@ -12,7 +12,7 @@
 for applying our changes
   - for example: in below `99-installer-config.yaml` we say to interface with mac
    `00:11:22:33:44:55` to use dhcp and use the name `eth_lan0`:
-    	```
+	```
 	network:
   	  version: 2
         renderer: networkd
@@ -48,7 +48,7 @@ auto-negotiation, port speed, duplex mode, and Wake-on-LAN:
 
 * show routes:
 	```
-		ip route show
+	ip route show
 	```
 
 * Add a default gateway:
@@ -58,7 +58,7 @@ auto-negotiation, port speed, duplex mode, and Wake-on-LAN:
 
 * del a default gateway:
 	```
-		sudo ip route del default via 192.168.1.1
+	sudo ip route del default via 192.168.1.1
 	```
 
 * If we need temporary dns we add them to `/etc/resolv.conf`:
@@ -81,10 +81,10 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
 `/etc/netplan/99_config.yaml` with this content:
 	```
 	network:
-  		version: 2
-  		renderer: networkd
-  		ethernets:
-   		  enp3s0:
-      	    dhcp4: true
+  	  version: 2
+  	  renderer: networkd
+  	  ethernets:
+   	    enp3s0:
+      	dhcp4: true
 	```
   - then we use `sudo netplan apply` so configuration can be applied.
