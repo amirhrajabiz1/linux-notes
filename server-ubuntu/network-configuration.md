@@ -110,8 +110,8 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
   - then we use `sudo netplan apply` so configuration can be applied.
   - What is `search` in above file?
    - assume you ping the host `server1`, then the system query These:
-    1. First query this FQDN `server1.mydomain.com`.
-	2. if above dns query gives no respond, query this `server1.otherdomain.com`
+      - First query this FQDN `server1.mydomain.com`.
+	  - if above dns query gives no respond, query this `server1.otherdomain.com`
    - If there was no respond, DNS server will provide a result of notfound and
      the DNS query will fail
 
@@ -133,14 +133,15 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
 	```
 
 * How ubuntu finds out where looks for dns first?
-> Ubuntu looks in `/etc/nsswitch.conf` file in `hosts` entry.
+	> Ubuntu looks in `/etc/nsswitch.conf` file in `hosts` entry.
 
 
 * The `networkctl` can query the status of network links
 
+
 * If we go to `/etc/networkd-dispatcher` we see several directories like:
- - `carrier.d`
- - `off.d`
- - `routable.d`
+	- `carrier.d`
+	- `off.d`
+	- `routable.d`
 * If we put `do.sh` in `off.d` and issue `networkd-dispatcher` command,
  now if an interface go to `off` state the `do.sh` runs.
