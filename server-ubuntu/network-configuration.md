@@ -89,3 +89,58 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
 		dhcp4: true
 	```
   - then we use `sudo netplan apply` so configuration can be applied.
+
+* If we want configure our enp0s3 interface staticly, we configure
+`/etc/netplan/99_config.yaml` with this content:
+	```
+	network:
+	version: 2
+	renderer: networkd
+	ethernets:
+		eth0:
+		addresses:
+			- 10.10.10.2/24
+		routes:
+			- to: default
+			via: 10.10.10.1
+		nameservers:
+			search: [mydomain.com, otherdomain.com]
+			addresses: [10.10.10.1, 1.1.1.1]
+	```
+  - then we use `sudo netplan apply` so configuration can be applied.
+  - What is `search` in above file?
+   - assume you ping the host `server1`, then the system query These:
+    1. First query this FQDN `server1.mydomain.com`.
+	2. if above dns query gives no respond, query this `server1.otherdomain.com`
+   - If there was no respond, DNS server will provide a result of notfound and
+     the DNS query will fail
+
+* Show loopback interface:
+	```
+	ip address show lo
+	```
+
+* `/etc/resolv.conf` is a file for dns configs. You can change this file for temperary purposes. The system of dhcp server can change it.
+
+* In `/etc/hosts` we can put host names with ips:
+	```
+	127.0.0.1   localhost
+	127.0.1.1   ubuntu-server
+	10.0.0.11   server1 server1.example.com vpn
+	10.0.0.12   server2 server2.example.com mail
+	10.0.0.13   server3 server3.example.com www
+	10.0.0.14   server4 server4.example.com file
+	```
+
+* How ubuntu finds out where looks for dns first?
+> Ubuntu looks in `/etc/nsswitch.conf` file in `hosts` entry.
+
+
+* The `networkctl` can query the status of network links
+
+* If we go to `/etc/networkd-dispatcher` we see several directories like:
+ - `carrier.d`
+ - `off.d`
+ - `routable.d`
+* If we put `do.sh` in `off.d` and issue `networkd-dispatcher` command,
+ now if an interface go to `off` state the `do.sh` runs.
