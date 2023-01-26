@@ -80,12 +80,12 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
 
 * If we want our enp0s3 interface use dhcp we configure 
 `/etc/netplan/99_config.yaml` with this content:
-	```
+```
 network:
   version: 2
   renderer: networkd
   ethernets:
     enp3s0:
       dhcp4: true
-	```
+```
   - then we use `sudo netplan apply` so configuration can be applied.
