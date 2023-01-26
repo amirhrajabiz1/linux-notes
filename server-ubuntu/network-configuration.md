@@ -12,7 +12,7 @@
 for applying our changes
   - for example: in below `99-installer-config.yaml` we say to interface with mac
    `00:11:22:33:44:55` to use dhcp and use the name `eth_lan0`:
-   
+
 	```
 	network:
   	  version: 2
@@ -81,11 +81,11 @@ and all our changes to `/etc/resolv.conf` will remove on reboot.
 * If we want our enp0s3 interface use dhcp we configure 
 `/etc/netplan/99_config.yaml` with this content:
 	```
-	network:
-  	  version: 2
-  	  renderer: networkd
-  	  ethernets:
-   	    enp3s0:
-	    dhcp4: true
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      dhcp4: true
 	```
   - then we use `sudo netplan apply` so configuration can be applied.
