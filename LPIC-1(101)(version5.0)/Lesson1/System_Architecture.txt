@@ -1,0 +1,22 @@
+* to see details about a specific device:
+```
+lspci -s 04:02:0 -v 
+```
+
+
+* to verify which kernel module is in use for the specified device:
+```
+lspci -s 01:00.0 -k
+```
+
+
+* to see all information about a USB device:
+```
+lsusb -v -d 1781:8c9f
+```
+
+
+* shows the current USB device mappings as a hierarchical tree
+```
+lsusb -t
+```

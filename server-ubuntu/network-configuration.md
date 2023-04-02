@@ -62,6 +62,11 @@ auto-negotiation, port speed, duplex mode, and Wake-on-LAN:
 	sudo ip route del default via 192.168.1.1
 	```
 
+* To add a route to the 192.168.1.0 network through the interface enp0s3:
+	```
+	sudo ip route add 192.168.1.0/24 dev enp0s3
+	```
+
 * If we need temporary dns we add them to `/etc/resolv.conf`:
 	```
 	nameserver 8.8.8.8

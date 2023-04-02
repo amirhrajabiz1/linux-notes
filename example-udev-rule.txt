@@ -1,0 +1,18 @@
+* Assume we want when a USB connected and mount to our Linux we run a script:
+- Run the following command, inserting a <devpath> such as /dev/sdb:
+```
+udevadm info -a -p $(udevadm info -q path -n <devpath>)
+```
+Then from output we note `SUBSYSTEMS=="usb"` and `ATTRS{serial}=="6c515e7066d379"`
+* then we make this file `/etc/udev/rules.d/99-MyFlash.rules` containing these:
+```
+SUBSYSTEMS=="usb", ATTRS{serial}=="6c515e7066d379", RUN+="/tmp/syncit.sh"
+```
+* Now create `/tmp/syncit.sh` and make that executable.
+
+* Then we run this:
+```
+sudo udevadm control --reload-rules && sudo service udev restart && sudo udevadm trigger
+```
+
+* From now whenever we Plugin this USB, `/tmp/syncit.sh` runs.
